@@ -26,3 +26,4 @@ resource "aws_iam_group_policy" "group_inline" {
     group = aws_iam_group.my_groups[each.key].name
     policy = each.value
 }
+
