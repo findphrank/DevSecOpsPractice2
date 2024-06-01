@@ -24,10 +24,7 @@ data "aws_iam_policy_document" "dev_inline_policy"{
 
     statement {
       sid = ""
-      actions = [
-        "ec2:*",
-        "s3:*"
-      ]
+      actions = ["*"]
       resources = ["*"]
     }
 }
