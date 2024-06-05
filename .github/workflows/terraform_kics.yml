@@ -1,0 +1,36 @@
+name: KICS Code scan
+
+on: 
+  workflow_call:
+    inputs:
+      ENABLE_COMMENTS:
+        required: true
+        type: boolean
+      WORKING_DIR:
+        required: true
+        type: string
+
+jobs:
+  kics:
+    name: Run KICS code analysis
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: ${{github.event.pull_request.head.ref}}
+    
+    - name: Run KICS Scan
+      uses: checkmarx/kics-github-action@v2.0.0
+      with:
+        path: ${{inputs.WORKING_DIR}}
+        token: ${{secrets.GITHUB_TOKEN}}
+        output_path: myResults/
+        ignore_on_exit: results
+        enable_comments: ${{inputs.ENABLE_COMMENTS}}
+
+    - name: display kics results
+      run: |
+        cat myResults/results.json    
+     
