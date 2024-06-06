@@ -69,7 +69,4 @@ jobs:
         id: plan
         run: terragrunt run-all plan -no-color --terragrunt-non-interactive
         continue-on-error: true  
-
-      - name: Terragrunt destroy
-        id: destroy
-        run: terragrunt run-all destroy -no-color --terragrunt-non-interactive
+        
